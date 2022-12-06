@@ -5,15 +5,25 @@ class Cell
     end
 
 
-    def ship      
-    end
+    # def ship
+    #     nil
+    #     if @coordinate == place_ship(ship_type)
+    #         false
+    #     end
+        
+    # end
 
-    def empty?
-        ship.nil?
-    end
+    # def empty?
+    #     if nil
+    #         true
+    #     else
+    #         false
+    #     end
+    # end
 
-    def place_ship(cruiser)
-    end
+    # def place_ship(ship_type)
+    #     @coordinate
+    # end
 
 
 end
