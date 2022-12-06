@@ -8,7 +8,7 @@ class Ship
     end
 
     def health
-        starting_health + @length
+        @starting_health + @length
     end
 
     def sunk?
