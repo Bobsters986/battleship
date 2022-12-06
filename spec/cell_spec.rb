@@ -3,7 +3,7 @@ require './lib/cell'
 
 RSpec.describe Cell do
     it "exists" do
-        
+
         cell = Cell.new("B4")
 
         expect(cell).to be_an_instance_of(Cell)
@@ -16,6 +16,8 @@ RSpec.describe Cell do
         expect(cell.ship).to eq(nil)
         expect(cell.empty?).to be(true)
     end
+
+    
 
 
 end
