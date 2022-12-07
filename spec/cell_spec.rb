@@ -25,9 +25,28 @@ RSpec.describe Cell do
         cruiser = Ship.new("Cruiser", 3)
 
         cell.place_ship(cruiser)
-
+        expect(cell.ship).to eq(cruiser)
         expect(cell.empty?).to eq(false)
 
     end
+
+    it "knows when it has been fired upon" do
+        cell = Cell.new("B4")
+        cruiser = Ship.new("Cruiser", 3)
+
+        cell.place_ship(cruiser)
+        expect(cell.fired_upon?).to be(false)
+
+        cell.fire_upon
+        expect(cell.ship.health).to eq(2)
+        expect(cell.fired_upon?).to eq(true)
+
+    end
+
+    # it "will return a string representation of the cell" do
+
+    # end
+
+
 
 end
