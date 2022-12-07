@@ -4,6 +4,7 @@ require './lib/cell'
 RSpec.describe Cell do
     it "exists" do
 
+
         cell = Cell.new("B4")
         cell.coordinate
 
@@ -87,12 +88,5 @@ RSpec.describe Cell do
     end
 
 
-
 end
-# cell render true
-# place ship on cell
-# if not been fired upon - not been fired upon and contains ship as S
 
-# cell will render a dot by default
-# We fire at the cell
-# When the cell is hit, the cell will render "M" because it has no ship
