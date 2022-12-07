@@ -28,9 +28,9 @@ class Cell
 
     def render
        if fired_upon? == true
-        return "H" if ship != nil
-        return "M" if ship == nil
+        return "M" if empty
         return "X" if ship.sunk?
+        return "H" if ship != nil
        end
 
        "."   
