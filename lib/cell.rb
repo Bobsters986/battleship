@@ -7,6 +7,7 @@ class Cell
         @coordinate = coordinate
         @ship = nil
         @fired_upon = false
+
     end
 
     def empty?
@@ -36,12 +37,21 @@ class Cell
        "."   
     end
 
+    def render(args = false)
+        if fired_upon?
+            return "M" if empty?
+            # ship == nil
+            return "X" if ship.sunk?
+            return "H" if !empty?
+            # != nil
+        end
+
+        return "S" if args == true && !empty?
+        "."
+
+    end
+
 end
 
 
 
-    # def ship
-    #     # when a cell is created, ship needs to equal nil
-    #     # when we place a ship on a cell, ship method needs to 
-    #     # return the name of the ship
-    # end
