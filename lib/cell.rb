@@ -1,3 +1,5 @@
+require './lib/ship'
+
 class Cell
 
     attr_reader :coordinate, :ship
@@ -16,18 +18,22 @@ class Cell
     end
 
     def fire_upon
-        # require 'pry'; binding.pry
-        # we place a ship on a cell
-        # when we check if the ship has been fired at, it returns false
-        # we fire at the ship
-        # the ship's health goes down by 1
-        # when we check if the ship has been fired at, it then returns true
-        ship.hit
         @fired_upon = true
+        ship.hit if empty? == false
     end
 
     def fired_upon?
         @fired_upon
+    end
+
+    def render
+       if fired_upon? == true
+        return "H" if ship != nil
+        return "M" if ship == nil
+        return "X" if ship.sunk?
+       end
+
+       "."   
     end
 
 end
