@@ -67,18 +67,31 @@ RSpec.describe Cell do
         expect(cell_2.render).to eq("H")
     end
 
-    xit "will render an S to show a ship" do
+    it "will render an S to show a ship" do
         cell_2 = Cell.new("C3")
         cruiser = Ship.new("Cruiser", 3)
 
         cell_2.place_ship(cruiser)
+        
         expect(cell_2.render).to eq(".")
         expect(cell_2.render(true)).to eq("S")
+
+        cell_2.fire_upon
+        expect(cruiser.sunk?).to eq(false)
+        
+        cruiser.hit
+        cruiser.hit
+
+        expect(cruiser.sunk?).to eq(true)
+        expect(cell_2.render).to eq("X")
     end
 
 
 
 end
+# cell render true
+# place ship on cell
+# if not been fired upon - not been fired upon and contains ship as S
 
 # cell will render a dot by default
 # We fire at the cell

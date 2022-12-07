@@ -24,13 +24,16 @@ class Cell
         @fired_upon
     end
 
-    def render(args = true)
-        if fired_upon? == true
-            return "H" if ship != nil
-            return "M" if ship == nil
+    def render(args = false)
+        if fired_upon?
+            return "M" if empty?
+            # ship == nil
             return "X" if ship.sunk?
+            return "H" if !empty?
+            # != nil
         end
 
+        return "S" if args == true && !empty?
         "."
 
     end
