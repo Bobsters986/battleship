@@ -45,7 +45,20 @@ RSpec.describe Cell do
     end
 
     # it "will return a string representation of the cell" do
+    it 'will render a dot by default' do
+        cell_1 = Cell.new("B4")
 
-    # end
+        expect(cell_1.render).to eq(".")
+    end
+
+    it 'will render an M for a miss' do
+        cell_1 = Cell.new("B4")
+        cruiser = Ship.new("Cruiser", 3)
+
+        cell_1.fire_upon
+        expect(cell_1.render).to eq("M")
+    end
+
+    end
 
 
