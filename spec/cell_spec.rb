@@ -4,6 +4,7 @@ require './lib/cell'
 RSpec.describe Cell do
     it "exists" do
 
+
         cell = Cell.new("B4")
         cell.coordinate
 
@@ -48,5 +49,3 @@ RSpec.describe Cell do
     # end
 
 
-
-end
