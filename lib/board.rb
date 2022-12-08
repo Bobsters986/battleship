@@ -1,5 +1,5 @@
-require './lib/ship'
 require './lib/cell'
+require './lib/ship'
 
 class Board
     attr_reader :cells
@@ -22,6 +22,20 @@ class Board
         "D3" => Cell.new("D3"),
         "D4" => Cell.new("D3")
         }
+    end
+
+    def valid_placement?(ship_type, ship_coordinates)
+        
+        letters = ship_coordinates.map { |coordinate| coordinate.split('').first }
+        numbers = ship_coordinates.map { |coordinate| coordinate.split('').last }
+        
+        ship_type.length == ship_coordinates.count
+
+        # ship_type.length = 3
+        # ship_coordinates.count = 2
+
+        # require 'pry'; binding.pry
+
     end
     
 end
