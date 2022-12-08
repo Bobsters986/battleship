@@ -27,5 +27,9 @@ class Board
     def valid_coordinate?(cell_value)
         @cells[cell_value] != nil
     end
+
+    def valid_placement?( ship_type, consecutive_coordinates)
+        ship_type.length == consecutive_coordinates
+    end
     
 end
