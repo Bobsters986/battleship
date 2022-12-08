@@ -1,5 +1,5 @@
-require './lib/ship'
 require './lib/cell'
+require './lib/ship'
 
 class Board
     attr_reader :cells
@@ -22,6 +22,10 @@ class Board
         "D3" => Cell.new("D3"),
         "D4" => Cell.new("D3")
         }
+    end
+
+    def valid_coordinate?(cell_value)
+        @cells[cell_value] != nil
     end
     
 end
