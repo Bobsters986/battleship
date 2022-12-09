@@ -28,8 +28,33 @@ class Board
         @cells[cell_value] != nil
     end
 
-    def valid_placement?( ship_type, consecutive_coordinates)
-        ship_type.length == consecutive_coordinates
+    def valid_placement?(ship_type, ship_coordinates)
+        valid_consecutive_coordinates(ship_coordinates)
+        ship_type.length == ship_coordinates.count
+        not_diagonal(ship_coordinates)
+        # require 'pry'; binding.pry
+    end
+
+    def consecutive_letters(ship_coordinates)
+        letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
+        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord - 1 == letter_1.ord }
+    end
+
+    def consecutive_numbers(ship_coordinates)
+        numbers = ship_coordinates.map { |coordinate| coordinate.split('').last}
+        numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i - 1 == number_1.to_i }
     end
     
+    def valid_consecutive_coordinates(ship_coordinates)
+        consecutive_letters(ship_coordinates)
+        consecutive_numbers(ship_coordinates)
+    end
+
+    def not_diagonal(ship_coordinates)
+        numbers = ship_coordinates.map { |coordinate| coordinate.split('').last}
+        letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
+        numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i == number_1.to_i } &&
+        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord == letter_1.ord }
+    end
+
 end
