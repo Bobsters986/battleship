@@ -24,18 +24,26 @@ class Board
         }
     end
 
+    def valid_coordinate?(cell_value)
+        @cells[cell_value] != nil
+    end
+
     def valid_placement?(ship_type, ship_coordinates)
         
         letters = ship_coordinates.map { |coordinate| coordinate.split('').first }
         numbers = ship_coordinates.map { |coordinate| coordinate.split('').last }
         
+        
         ship_type.length == ship_coordinates.count
 
-        # ship_type.length = 3
-        # ship_coordinates.count = 2
+        return false if ship_type.length != ship_coordinates.count
 
-        # require 'pry'; binding.pry
+        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord - 1 == letter_1.ord } || numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i - 1 == number_1.to_i }
+        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord - 1 == letter_1.ord } && numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i - 1 == number_1.to_i } 
 
+    end
+
+    def place(ship_type, ship_coordinates)
     end
     
 end
