@@ -63,7 +63,7 @@ class Board
     end
 
     def place(ship_type, ship_coordinates)
-        self.valid_placement?(ship_type, ship_coordinates)
+        # self.valid_placement?(ship_type, ship_coordinates)
             ship_coordinates.each do |coordinate|
                 @cells[coordinate].place_ship(ship_type)
              end
@@ -73,6 +73,23 @@ class Board
         ship_coordinates.all? do |coordinate|
             @cells[coordinate].empty?
         end
+    end
+
+    def render(args = false)
+        rendered = "  1 2 3 4 \nA "
+
+        rendered += board_cells(args)
+
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
+    end
+
+    def board_cells(args)
+        @cells.each_value.map do |cell|
+            cell.render(args)
+        end.join(" ")
     end
 
 end
