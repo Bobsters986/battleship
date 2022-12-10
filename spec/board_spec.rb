@@ -63,7 +63,7 @@ RSpec.describe Board do
         expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to be true
     end
 
-    xit "placing ships" do
+    it "placing ships" do
         board = Board.new
         cruiser = Ship.new("Cruiser", 3)
 
@@ -78,7 +78,7 @@ RSpec.describe Board do
         expect(cell_3.ship == cell_2.ship).to be true
     end
 
-    xit "prevent overlapping ships" do
+    it "prevent overlapping ships" do
         board = Board.new
         cruiser = Ship.new("Cruiser", 3)
 
