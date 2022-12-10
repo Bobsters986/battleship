@@ -3,6 +3,7 @@ require './lib/ship'
 
 class Board
     attr_reader :cells
+
     def initialize
         @cells = {
         "A1" => Cell.new("A1"),
@@ -29,7 +30,8 @@ class Board
     end
 
     def valid_placement?(ship_type, ship_coordinates)
-        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates))
+        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
+
     end
 
     def consecutive_letters?(ship_coordinates)
@@ -58,6 +60,19 @@ class Board
     def same_letters?(ship_coordinates)
         letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
         letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord == letter_1.ord }
+    end
+
+    def place(ship_type, ship_coordinates)
+        self.valid_placement?(ship_type, ship_coordinates)
+            ship_coordinates.each do |coordinate|
+                @cells[coordinate].place_ship(ship_type)
+             end
+    end
+
+    def overlap_check(ship_coordinates)
+        ship_coordinates.all? do |coordinate|
+            @cells[coordinate].empty?
+        end
     end
 
 end
