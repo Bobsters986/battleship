@@ -1,6 +1,6 @@
 require './lib/board'
-require './lib/cell'
 require './lib/ship'
+require './lib/cell'
 
 RSpec.describe Board do
     it "exists" do
@@ -63,11 +63,12 @@ RSpec.describe Board do
         expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to be true
     end
 
-    xit "placing ships" do
+    it "placing ships" do
         board = Board.new
         cruiser = Ship.new("Cruiser", 3)
 
         board.place(cruiser, ["A1", "A2", "A3"])
+
         cell_1 = board.cells["A1"]  
         cell_2 = board.cells["A2"]
         cell_3 = board.cells["A3"]
@@ -78,7 +79,7 @@ RSpec.describe Board do
         expect(cell_3.ship == cell_2.ship).to be true
     end
 
-    xit "prevent overlapping ships" do
+    it "prevent overlapping ships" do
         board = Board.new
         cruiser = Ship.new("Cruiser", 3)
 
@@ -87,5 +88,18 @@ RSpec.describe Board do
 
         expect(board.valid_placement?(submarine, ["A1", "B1"])).to be false
     end
+
+    it "can show hidden ships" do
+        board = Board.new
+        cruiser = Ship.new("Cruiser", 3)
+        board.place(cruiser, ["A1", "A2", "A3"])
+
+        expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+        expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    # if number is one but also has a ship
+    # or have a ship but not number 1
+    # look at value to see if there's a ship
 
 end

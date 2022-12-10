@@ -1,5 +1,5 @@
-require './lib/cell'
 require './lib/ship'
+require './lib/cell'
 
 class Board
     attr_reader :cells
@@ -29,7 +29,7 @@ class Board
     end
 
     def valid_placement?(ship_type, ship_coordinates)
-        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates))
+        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
     end
 
     def consecutive_letters?(ship_coordinates)
@@ -59,5 +59,54 @@ class Board
         letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
         letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord == letter_1.ord }
     end
+
+    def place(ship_type, ship_coordinates)
+        if self.valid_placement?(ship_type, ship_coordinates)
+            ship_coordinates.each do |coordinate|
+                @cells[coordinate].place_ship(ship_type)
+            end
+        end
+    end
+
+    def overlap_check(ship_coordinates)
+        ship_coordinates.all? do |coordinate|
+            @cells[coordinate].empty?
+        end
+    end
+
+
+    def render(args = false)
+        rendered = "  1 2 3 4 \nA "
+
+        rendered += board_cells(args)
+
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
+    end
+
+    def board_cells(args)
+        @cells.each_value.map do |cell|
+            cell.render(args)
+        end.join(" ")
+    end
+
+    # def render
+    #     layout =
+    #     @cells.map do |key, value|
+    #         letter, number = key.split('')
+    #         if number == "1"
+    #             letter + " ."
+    #         elsif number == "4"
+    #             " . \n"
+    #         else
+    #             " ."  
+    #         end
+
+    #     end.join
+
+    #     "  1 2 3 4 \n" + layout
+    # end
 
 end
