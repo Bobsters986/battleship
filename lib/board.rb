@@ -74,21 +74,39 @@ class Board
         end
     end
 
-    def render
-        layout =
-        @cells.map do |key, value|
-            letter, number = key.split('')
-            if number == "1"
-                letter + " ."
-            elsif number == "4"
-                " . \n"
-            else
-                " ."  
-            end
 
-        end.join
+    def render(args = false)
+        rendered = "  1 2 3 4 \nA "
 
-        "  1 2 3 4 \n" + layout
+        rendered += board_cells(args)
+
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
     end
+
+    def board_cells(args)
+        @cells.each_value.map do |cell|
+            cell.render(args)
+        end.join(" ")
+    end
+
+    # def render
+    #     layout =
+    #     @cells.map do |key, value|
+    #         letter, number = key.split('')
+    #         if number == "1"
+    #             letter + " ."
+    #         elsif number == "4"
+    #             " . \n"
+    #         else
+    #             " ."  
+    #         end
+
+    #     end.join
+
+    #     "  1 2 3 4 \n" + layout
+    # end
 
 end
