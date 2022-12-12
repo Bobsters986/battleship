@@ -1,5 +1,5 @@
-require './lib/cell'
 require './lib/ship'
+require './lib/cell'
 
 class Board
     attr_reader :cells
@@ -63,10 +63,11 @@ class Board
     end
 
     def place(ship_type, ship_coordinates)
-        # self.valid_placement?(ship_type, ship_coordinates)
+        if self.valid_placement?(ship_type, ship_coordinates)
             ship_coordinates.each do |coordinate|
                 @cells[coordinate].place_ship(ship_type)
-             end
+            end
+        end
     end
 
     def overlap_check(ship_coordinates)
@@ -91,5 +92,22 @@ class Board
             cell.render(args)
         end.join(" ")
     end
+
+    # def render
+    #     layout =
+    #     @cells.map do |key, value|
+    #         letter, number = key.split('')
+    #         if number == "1"
+    #             letter + " ."
+    #         elsif number == "4"
+    #             " . \n"
+    #         else
+    #             " ."  
+    #         end
+
+    #     end.join
+
+    #     "  1 2 3 4 \n" + layout
+    # end
 
 end
