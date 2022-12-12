@@ -3,6 +3,7 @@ require './lib/cell'
 
 class Board
     attr_reader :cells
+
     def initialize
         @cells = {
         "A1" => Cell.new("A1"),
@@ -30,6 +31,7 @@ class Board
 
     def valid_placement?(ship_type, ship_coordinates)
         ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
+
     end
 
     def consecutive_letters?(ship_coordinates)
@@ -73,7 +75,6 @@ class Board
             @cells[coordinate].empty?
         end
     end
-
 
     def render(args = false)
         rendered = "  1 2 3 4 \nA "

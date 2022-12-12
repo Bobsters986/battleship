@@ -101,5 +101,4 @@ RSpec.describe Board do
     # if number is one but also has a ship
     # or have a ship but not number 1
     # look at value to see if there's a ship
-
 end
