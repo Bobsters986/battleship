@@ -26,7 +26,10 @@ class Board
     end
 
     def valid_coordinate?(cell_value)
-        @cells[cell_value] != nil
+        cell_value.all? do |cell|
+            @cells.keys.include?(cell)
+        end
+        # @cells[cell_value] != nil, didn't work when running game
     end
 
     def valid_placement?(ship_type, ship_coordinates)
