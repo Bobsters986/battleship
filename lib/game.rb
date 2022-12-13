@@ -96,29 +96,49 @@ class Game
         while winner? == false
             display_boards
             user_shot
-            # computer_shot
+            computer_shot
         end
     end
 
     def display_boards
         p "=============COMPUTER BOARD=============\n"
-        p @computer_board.render
-
+        puts @computer_board.render
         p "==============PLAYER BOARD==============\n"
-        p @user_board.render(true)
+        puts @user_board.render(true)
     end
 
-    # def results(player, coordinate, cell_render)
-    #     if 
-    # end
+    def shot_results(user_shot)
+        if @computer_board.cells[user_shot].render == "M"
+            p "Your shot on " + user_shot + " was a miss!"
+        elsif @computer_board.cells[user_shot].render == "H"
+            p "Your shot on " + user_shot + " was a hit!"
+        else @computer_board.cells[user_shot].render == "X"
+            p "You have sunk my ship!"
+        end
+    end
 
     def user_shot
         p "Enter the coordinate for your shot."
-        user_input = gets.chomp.upcase
-        if @computer_board.valid_coordinate?([user_input]) == true && @cells.fired_upon? == false
-            return @computer_board.cells([user_input]).render
+        # user_input = gets.chomp.upcase
+        user_input = @user_board.cells.keys.sample
+
+        until @computer_board.valid_coordinate?([user_input]) == true && @computer_board.cells[user_input].fired_upon? == false
+            p "Please try again"
+            # user_input = gets.chomp.upcase
+            user_input = @user_board.cells.keys.sample
         end
-        # @computer_board.cells[key].fire_upon
+
+        @computer_board.cells[user_input].fire_upon
+        shot_results(user_input)
+    end
+
+    def computer_shot
+        comp_input = @user_board.cells.keys.sample
+        until @user_board.valid_coordinate?([comp_input]) == true && @user_board.cells[comp_input].fired_upon? == false
+            comp_input = @user_board.cells.keys.sample
+        end
+
+        @user_board.cells[comp_input].fire_upon
     end
 
     def winner?
@@ -137,3 +157,13 @@ class Game
 
     
 end
+
+# def shot_results
+#     if @computer_board.cells[user_input].fired_upon? && @computer_board.cells[user_input].!empty?
+#         p "Your shot was a hit!"
+#     elsif @computer_board.cells[user_input].fired_upon? && @computer_board.cells[user_input].empty?
+#         p "Your shot was a miss!"
+#     else @computer_board.cells[user_input].fired_upon?
+#         p "You have sunk my ship!"
+#     end
+# end
