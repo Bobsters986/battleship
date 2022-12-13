@@ -32,18 +32,27 @@ class Cell
         @fired_upon
     end
 
-    def render(args = false)
-        if fired_upon?
-            return "M" if empty?
-            # ship == nil
-            return "X" if ship.sunk?
-            return "H" if !empty?
-            # != nil
+    def render(show_ships = false)
+        if show_ships == false
+            if fired_upon?
+                return "M" if empty?
+                # ship == nil
+                return "X" if ship.sunk?
+                return "H" if !empty?
+                # != nil
+            else
+                "."
+            end
+        else show_ships == true
+            if fired_upon?
+                return "M" if empty?
+                return "X" if ship.sunk?
+                return "H" if !empty?
+            else
+                return "." if empty?
+                return "S" if !empty?
+            end
         end
-
-        return "S" if args == true && !empty?
-        "."
-
     end
 
 end
