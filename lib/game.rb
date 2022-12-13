@@ -82,7 +82,58 @@ class Game
         p @user_board.render(true)
         p 
         p "All ships placed, lets play!"
-        
+        turn
     end
 
+
+    # def turn 
+    #     until @player.has_lost? == true
+
+    #     end
+    # end
+
+    def turn
+        while winner? == false
+            display_boards
+            user_shot
+            # computer_shot
+        end
+    end
+
+    def display_boards
+        p "=============COMPUTER BOARD=============\n"
+        p @computer_board.render
+
+        p "==============PLAYER BOARD==============\n"
+        p @user_board.render(true)
+    end
+
+    # def results(player, coordinate, cell_render)
+    #     if 
+    # end
+
+    def user_shot
+        p "Enter the coordinate for your shot."
+        user_input = gets.chomp.upcase
+        if @computer_board.valid_coordinate?([user_input]) == true && @cells.fired_upon? == false
+            return @computer_board.cells([user_input]).render
+        end
+        # @computer_board.cells[key].fire_upon
+    end
+
+    def winner?
+        if @user.has_lost? == true
+            p "I won!"
+        elsif @computer.has_lost? == true
+            p "You won!"
+        else
+            false
+        end
+    end
+
+
+
+
+
+    
 end
