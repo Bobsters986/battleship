@@ -16,11 +16,11 @@ RSpec.describe Board do
         board = Board.new
         board.cells
 
-        expect(board.valid_coordinate?("A1")).to eq(true)
-        expect(board.valid_coordinate?("D4")).to eq(true)
-        expect(board.valid_coordinate?("A5")).to eq(false)
-        expect(board.valid_coordinate?("E1")).to eq(false)
-        expect(board.valid_coordinate?("A22")).to eq(false)
+        expect(board.valid_coordinate?(["A1"])).to eq(true)
+        expect(board.valid_coordinate?(["D4"])).to eq(true)
+        expect(board.valid_coordinate?(["A5"])).to eq(false)
+        expect(board.valid_coordinate?(["E1"])).to eq(false)
+        expect(board.valid_coordinate?(["A22"])).to eq(false)
     end
 
     it "number of coordinates is equal to ship length" do
