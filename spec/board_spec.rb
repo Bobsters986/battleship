@@ -97,8 +97,4 @@ RSpec.describe Board do
         expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
         expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
-
-    # if number is one but also has a ship
-    # or have a ship but not number 1
-    # look at value to see if there's a ship
 end

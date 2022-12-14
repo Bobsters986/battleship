@@ -14,7 +14,6 @@ RSpec.describe Ship do
             cruiser = Ship.new('Cruiser', 3)
 
             expect(cruiser.health).to eq(3)
-
         end
 
         it 'can lose health and sink' do
@@ -32,7 +31,6 @@ RSpec.describe Ship do
 
             cruiser.hit
             expect(cruiser.sunk?).to eq(true)
-
         end
     end
 end

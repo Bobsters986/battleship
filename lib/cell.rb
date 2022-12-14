@@ -7,7 +7,6 @@ class Cell
         @coordinate = coordinate
         @ship = nil
         @fired_upon = false
-
     end
 
     def empty?
@@ -20,8 +19,6 @@ class Cell
     end
 
     def fire_upon
-        # @fired_upon = true
-        # ship.hit if empty? == false
         @fired_upon = true 
         if @ship != nil
             @ship.hit
@@ -36,10 +33,8 @@ class Cell
         if show_ships == false
             if fired_upon?
                 return "M" if empty?
-                # ship == nil
                 return "X" if ship.sunk?
                 return "H" if !empty?
-                # != nil
             else
                 "."
             end
@@ -54,7 +49,6 @@ class Cell
             end
         end
     end
-
 end
 
 

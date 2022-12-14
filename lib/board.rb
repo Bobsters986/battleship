@@ -29,12 +29,10 @@ class Board
         cell_value.all? do |cell|
             @cells.keys.include?(cell)
         end
-        # @cells[cell_value] != nil, didn't work when running game
     end
 
     def valid_placement?(ship_type, ship_coordinates)
         ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
-
     end
 
     def consecutive_letters?(ship_coordinates)
@@ -79,20 +77,37 @@ class Board
         end
     end
 
-    def render(args = false)
-        rendered = "  1 2 3 4 \nA "
     
-        rendered += board_cells(args)
-    
-        rendered.insert(21, "\nB ")
-        rendered.insert(32, "\nC ")
-        rendered.insert(43, "\nD ")
-        rendered.insert(53, " \n")
+    def render(show = false)
+        if show == true
+            "  1 2 3 4 \n" \
+            "A #{@cells["A1"].render(true)} #{@cells["A2"].render(true)} #{@cells["A3"].render(true)} #{@cells["A4"].render(true)} \n" \
+            "B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" \
+            "C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" \
+            "D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n" \
+        else show == false
+            "  1 2 3 4 \n" \
+            "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" \
+            "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" \
+            "C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" \
+            "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n" \
+        end
     end
     
-    def board_cells(args)
-        @cells.each_value.map do |cell|
-            cell.render(args)
-        end.join(" ")
-    end
+    # def render(args = false)
+    #     rendered = "  1 2 3 4 \nA "
+    
+    #     rendered += board_cells(args)
+    
+    #     rendered.insert(21, "\nB ")
+    #     rendered.insert(32, "\nC ")
+    #     rendered.insert(43, "\nD ")
+    #     rendered.insert(53, " \n")
+    # end
+    
+    # def board_cells(args)
+    #     @cells.each_value.map do |cell|
+    #         cell.render(args)
+    #     end.join(" ")
+    # end
 end
