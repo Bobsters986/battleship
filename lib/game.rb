@@ -14,14 +14,13 @@ class Game
     def start
        p "Welcome to BATTLESHIP."
        p "Enter 'p' to play. Enter 'q' to quit."
-
+        
         user_input = gets.chomp.downcase
         if user_input == "p"
             run_game
-        elsif user_input == "q"
+        else 
             p "Thanks for playing!"
-        else
-            start
+            exit!
         end 
     end
 
@@ -140,11 +139,20 @@ class Game
         comp_shot_results(comp_input)
     end
 
+    def clear_boards
+        @user_board = Board.new
+        @computer_board = Board.new
+    end
+
     def winner?
         if @user.has_lost? == true
             p "I won!"
+            clear_boards
+            start
         elsif @computer.has_lost? == true
             p "You won!"
+            clear_boards
+            start
         else
             false
         end
