@@ -15,5 +15,4 @@ class Player
     def has_lost?
         @big_ship.sunk? && @small_ship.sunk?
     end
-
 end

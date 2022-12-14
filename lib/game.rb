@@ -23,18 +23,15 @@ class Game
         else
             start
         end 
-        
     end
 
     def run_game
         p "I have laid out my ships on the grid."
         p "You now need to lay out your two ships."
         p "The Cruiser is three units long and the Submarine is two units long."
-        p 
         puts @user_board.render
         computer_ship_placement
         user_ship_placement
-        
     end
 
     def computer_ship_placement
@@ -66,7 +63,7 @@ class Game
                 p "Those are invalid coordinates. Please try again:"
             end
         end
-        p 
+        
         puts @user_board.render(true)
         p "Enter the squares for the Submarine (2 spaces):"
 
@@ -79,19 +76,11 @@ class Game
                 p "Those are invalid coordinates. Please try again:"
             end
         end
-        p 
+        
         puts @user_board.render(true)
-        p 
         p "All ships placed, lets play!"
         turn
     end
-
-
-    # def turn 
-    #     until @player.has_lost? == true
-
-    #     end
-    # end
 
     def turn
         while winner? == false
@@ -130,15 +119,14 @@ class Game
 
     def user_shot
         p "Enter the coordinate for your shot."
-        # user_input = gets.chomp.upcase
-        user_input = @user_board.cells.keys.sample
+        user_input = gets.chomp.upcase
+        #to automate game-- user_input = @user_board.cells.keys.sample
 
         until @computer_board.valid_coordinate?([user_input]) == true && @computer_board.cells[user_input].fired_upon? == false
             p "Please try again"
-            # user_input = gets.chomp.upcase
-            user_input = @user_board.cells.keys.sample
+            user_input = gets.chomp.upcase
+            #to automate game-- user_input = @user_board.cells.keys.sample
         end
-
         @computer_board.cells[user_input].fire_upon
         user_shot_results(user_input)
     end
@@ -148,7 +136,6 @@ class Game
         until @user_board.valid_coordinate?([comp_input]) == true && @user_board.cells[comp_input].fired_upon? == false
             comp_input = @user_board.cells.keys.sample
         end
-
         @user_board.cells[comp_input].fire_upon
         comp_shot_results(comp_input)
     end
@@ -162,20 +149,4 @@ class Game
             false
         end
     end
-
-
-
-
-
-    
 end
-
-# def shot_results
-#     if @computer_board.cells[user_input].fired_upon? && @computer_board.cells[user_input].!empty?
-#         p "Your shot was a hit!"
-#     elsif @computer_board.cells[user_input].fired_upon? && @computer_board.cells[user_input].empty?
-#         p "Your shot was a miss!"
-#     else @computer_board.cells[user_input].fired_upon?
-#         p "You have sunk my ship!"
-#     end
-# end

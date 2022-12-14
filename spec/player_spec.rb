@@ -42,5 +42,4 @@ RSpec.describe Player do
         expect(sub_1.sunk?).to be true
         expect(user.has_lost?).to be true
     end
-
 end

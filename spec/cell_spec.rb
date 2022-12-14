@@ -3,8 +3,6 @@ require './lib/cell'
 
 RSpec.describe Cell do
     it "exists" do
-
-
         cell = Cell.new("B4")
         cell.coordinate
 
@@ -28,7 +26,6 @@ RSpec.describe Cell do
         cell.place_ship(cruiser)
         expect(cell.ship).to eq(cruiser)
         expect(cell.empty?).to eq(false)
-
     end
 
     it "knows when it has been fired upon" do
@@ -41,7 +38,6 @@ RSpec.describe Cell do
         cell.fire_upon
         expect(cell.ship.health).to eq(2)
         expect(cell.fired_upon?).to eq(true)
-
     end
 
     it "will render a dot by default" do
@@ -86,7 +82,4 @@ RSpec.describe Cell do
         expect(cruiser.sunk?).to eq(true)
         expect(cell_2.render).to eq("X")
     end
-
-
 end
-
