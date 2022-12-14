@@ -30,39 +30,45 @@ class Board
             @cells.keys.include?(cell)
         end
     end
-
-    def valid_placement?(ship_type, ship_coordinates)
-        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
-    end
-
+    
     def consecutive_letters?(ship_coordinates)
         letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
         letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord - 1 == letter_1.ord }
     end
-
+    
     def consecutive_numbers?(ship_coordinates)
         numbers = ship_coordinates.map { |coordinate| coordinate.split('').last}
         numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i - 1 == number_1.to_i }
     end
     
-    def valid_horizontal?(ship_coordinates)
-        consecutive_letters?(ship_coordinates) && same_numbers?(ship_coordinates)
-    end
-
-    def valid_vertical?(ship_coordinates)
-        consecutive_numbers?(ship_coordinates) && same_letters?(ship_coordinates)
+    def same_letters?(ship_coordinates)
+        letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
+        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord == letter_1.ord }
     end
 
     def same_numbers?(ship_coordinates)
         numbers = ship_coordinates.map { |coordinate| coordinate.split('').last}
         numbers.each_cons(2).all? { |number_1, number_2| number_2.to_i == number_1.to_i } 
     end
-
-    def same_letters?(ship_coordinates)
-        letters = ship_coordinates.map { |coordinate| coordinate.split('').first}
-        letters.each_cons(2).all? { |letter_1, letter_2| letter_2.ord == letter_1.ord }
+    
+    def valid_vertical?(ship_coordinates)
+        consecutive_letters?(ship_coordinates) && same_numbers?(ship_coordinates)
+    end
+    
+    def valid_horizontal?(ship_coordinates)
+        consecutive_numbers?(ship_coordinates) && same_letters?(ship_coordinates)
     end
 
+    def overlap_check(ship_coordinates)
+        ship_coordinates.all? do |coordinate|
+            @cells[coordinate].empty?
+        end
+    end
+    
+    def valid_placement?(ship_type, ship_coordinates)
+        ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
+    end
+    
     def place(ship_type, ship_coordinates)
         if self.valid_placement?(ship_type, ship_coordinates)
             ship_coordinates.each do |coordinate|
@@ -71,13 +77,6 @@ class Board
         end
     end
 
-    def overlap_check(ship_coordinates)
-        ship_coordinates.all? do |coordinate|
-            @cells[coordinate].empty?
-        end
-    end
-
-    
     def render(show = false)
         if show == true
             "  1 2 3 4 \n" \
