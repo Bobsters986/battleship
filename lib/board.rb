@@ -79,88 +79,20 @@ class Board
         end
     end
 
-    # def render(args = false)
-    #     rendered = "  1 2 3 4 \nA "
+    def render(args = false)
+        rendered = "  1 2 3 4 \nA "
     
-    #     rendered += board_cells(args)
+        rendered += board_cells(args)
     
-    #     rendered.insert(21, "\nB ")
-    #     rendered.insert(32, "\nC ")
-    #     rendered.insert(43, "\nD ")
-    #     rendered.insert(53, " \n")
-    # end
-    
-    # def board_cells(args)
-    #     @cells.each_value.map do |cell|
-    #         cell.render(args)
-    #     end.join(" ")
-    # end
-
-    def render(show_ships = false)
-        layout =
-        @cells.map do |key, value|
-            letter, number = key.split('')
-            if number == "1"
-                letter + " ."
-            elsif number == "4"
-                " . \n"
-            else
-                " ."  
-            end
-
-        end.join
-
-        "  1 2 3 4 \n" + layout
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
     end
-
+    
+    def board_cells(args)
+        @cells.each_value.map do |cell|
+            cell.render(args)
+        end.join(" ")
+    end
 end
-
-# def render(args = false)
-#     rendered = "  1 2 3 4 \nA "
-
-#     rendered += board_cells(args)
-
-#     rendered.insert(21, "\nB ")
-#     rendered.insert(32, "\nC ")
-#     rendered.insert(43, "\nD ")
-#     rendered.insert(53, " \n")
-# end
-
-# def board_cells(args)
-#     @cells.each_value.map do |cell|
-#         cell.render(args)
-#     end.join(" ")
-# end
-
-# def render(show_ships = false)
-#     layout =
-#     @cells.map do |key, value|
-#         letter, number = key.split('')
-#         if number == "1"
-#             letter + " ."
-#         elsif number == "4"
-#             " . \n"
-#         else
-#             " ."  
-#         end
-
-#     end.join
-
-#     "  1 2 3 4 \n" + layout
-# end
-
-# def render(show = false)
-#     numbers_array = (1..@size).to_a
-#     first_row = '  ' + numbers_array.join(' ') + " \n"
-
-#     rows = @letters_array.map do |letter|
-#       row_string = letter.to_s
-
-#       @cells.each do |_key, cell|
-#         row_string += " #{cell.render(show)}" if cell.coordinate.include?(letter)
-#       end
-#       [row_string += ' ']
-#     end
-
-#     first_row + rows.join("\n") + "\n"
-#   end
