@@ -29,12 +29,10 @@ class Board
         cell_value.all? do |cell|
             @cells.keys.include?(cell)
         end
-        # @cells[cell_value] != nil, didn't work when running game
     end
 
     def valid_placement?(ship_type, ship_coordinates)
         ship_type.length == ship_coordinates.count && (valid_vertical?(ship_coordinates) || valid_horizontal?(ship_coordinates)) && overlap_check(ship_coordinates)
-
     end
 
     def consecutive_letters?(ship_coordinates)
@@ -103,7 +101,7 @@ class Board
             "B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" \
             "C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" \
             "D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n" \
-        else
+        else show == false
             "  1 2 3 4 \n" \
             "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" \
             "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" \
