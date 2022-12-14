@@ -31,9 +31,10 @@ class Game
         p "You now need to lay out your two ships."
         p "The Cruiser is three units long and the Submarine is two units long."
         p 
-        p @user_board.render
+        puts @user_board.render
         computer_ship_placement
         user_ship_placement
+        
     end
 
     def computer_ship_placement
@@ -66,7 +67,7 @@ class Game
             end
         end
         p 
-        p @user_board.render(true)
+        puts @user_board.render(true)
         p "Enter the squares for the Submarine (2 spaces):"
 
         loop do
@@ -79,7 +80,7 @@ class Game
             end
         end
         p 
-        p @user_board.render(true)
+        puts @user_board.render(true)
         p 
         p "All ships placed, lets play!"
         turn
@@ -107,13 +108,23 @@ class Game
         puts @user_board.render(true)
     end
 
-    def shot_results(user_shot)
+    def user_shot_results(user_shot)
         if @computer_board.cells[user_shot].render == "M"
             p "Your shot on " + user_shot + " was a miss!"
         elsif @computer_board.cells[user_shot].render == "H"
             p "Your shot on " + user_shot + " was a hit!"
         else @computer_board.cells[user_shot].render == "X"
             p "You have sunk my ship!"
+        end
+    end
+
+    def comp_shot_results(comp_shot)
+        if @user_board.cells[comp_shot].render == "M"
+            p "My shot on " + comp_shot + " was a miss!"
+        elsif @user_board.cells[comp_shot].render == "H"
+            p "My shot on " + comp_shot + " was a hit!"
+        else @user_board.cells[comp_shot].render == "X"
+            p "I have sunk your ship!"
         end
     end
 
@@ -129,7 +140,7 @@ class Game
         end
 
         @computer_board.cells[user_input].fire_upon
-        shot_results(user_input)
+        user_shot_results(user_input)
     end
 
     def computer_shot
@@ -139,6 +150,7 @@ class Game
         end
 
         @user_board.cells[comp_input].fire_upon
+        comp_shot_results(comp_input)
     end
 
     def winner?
